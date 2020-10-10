@@ -45,9 +45,11 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Command="{Binding SortEmployerByPassportIdCommand}" Content="Sort by Passport Id" HorizontalAlignment="Left" Margin="900,12,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
         <Button Command="{Binding SortEmployerByFirstNameCommand}" Content="Sort by First Name" HorizontalAlignment="Left" Margin="900,46,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
-        <Button Command="{Binding SortEmployerBySexCommand}" Content="Sort by Sex" HorizontalAlignment="Left" Margin="900,80,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
-        <Button Command="{Binding SortEmployerBySalaryCommand}" Content="Sort by Salary" HorizontalAlignment="Left" Margin="900,114,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
+        <Button Command="{Binding SortEmployerByPatronymicAndFirstNameCommand}" Content="Sort by Patronymic And First Name" HorizontalAlignment="Left" Margin="900,80,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
+        <Button Command="{Binding SortEmployerBySexCommand}" Content="Sort by Sex" HorizontalAlignment="Left" Margin="900,114,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
+        <Button Command="{Binding SortEmployerBySalaryCommand}" Content="Sort by Salary" HorizontalAlignment="Left" Margin="900,148,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
         <Button Command="{Binding SortEmployerBySexAndSalaryCommand}" Content="Sort by Sex And Salary" HorizontalAlignment="Left" Margin="900,182,0,0" VerticalAlignment="Top" Height="29" Width="371"/>
 
     </Grid>

@@ -21,7 +21,7 @@ namespace WpfNetCore_HW8.Model
 
             foreach (var department in _departments)
             {
-                department.AddEmployers(RandomEmployers.GenerateRandomEployers(1000));
+                department.AddEmployers(RandomEmployers.GenerateRandomEployers(10000));
             }
         }
 
@@ -82,6 +82,19 @@ namespace WpfNetCore_HW8.Model
         public void SortBySex()
         {
             var backing = new BindingList<Employer>(employersFromAllDepartments.OrderBy(x => x, new SexCompare()).ToList());
+
+            UpdateListAfterSort(backing);
+        }
+        public void SortByPassportId()
+        {
+            var backing = new BindingList<Employer>(employersFromAllDepartments.OrderBy(x => x, new PassportIdCompare()).ToList());
+
+            UpdateListAfterSort(backing);
+        }
+
+        public void SortByPatronymicAndFirstName()
+        {
+            var backing = new BindingList<Employer>(employersFromAllDepartments.OrderBy(x => x, new PatronymicAndFirstNameCompare()).ToList());
 
             UpdateListAfterSort(backing);
         }

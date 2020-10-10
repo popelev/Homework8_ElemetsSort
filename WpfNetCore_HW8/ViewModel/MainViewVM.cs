@@ -100,7 +100,32 @@ namespace WpfNetCore_HW8.ViewModel
                        }));
             }
         }
+        
+        private RelayCommand sortEmployerByPassportIdCommand;
+        public RelayCommand SortEmployerByPassportIdCommand
+        {
+            get
+            {
+                return sortEmployerByPassportIdCommand ??
+                       (sortEmployerByPassportIdCommand = new RelayCommand(obj =>
+                       {
+                           company.SortByPassportId();
+                       }));
+            }
+        }
 
+        private RelayCommand sortEmployerByPatronymicAndFirstNameCommand;
+        public RelayCommand SortEmployerByPatronymicAndFirstNameCommand
+        {
+            get
+            {
+                return sortEmployerByPatronymicAndFirstNameCommand ??
+                       (sortEmployerByPatronymicAndFirstNameCommand = new RelayCommand(obj =>
+                       {
+                           company.SortByPatronymicAndFirstName();
+                       }));
+            }
+        }
     }
 }
 
