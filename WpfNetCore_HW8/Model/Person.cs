@@ -6,6 +6,7 @@ using System.Windows.Documents;
 
 namespace WpfNetCore_HW8.Model
 {
+    [Serializable]
     public class Person : INotifyPropertyChangedCustom, ICloneable
     {
         public Passport Passport;

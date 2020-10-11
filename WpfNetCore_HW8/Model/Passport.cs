@@ -6,6 +6,7 @@ using System.Text;
 
 namespace WpfNetCore_HW8.Model
 {
+    [Serializable]
     public class Passport
     {
         private string _firstName;
@@ -76,6 +77,10 @@ namespace WpfNetCore_HW8.Model
                 _birthdate = value;
                 OnPropertyChanged();
             }
+        }
+
+        public Passport()
+        {
         }
 
         public Passport(string firstName, string patronymic, string lastName, DateTime birthdate, Sex sex)

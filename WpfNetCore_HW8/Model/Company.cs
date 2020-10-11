@@ -8,6 +8,7 @@ using WpfNetCore_HW8.Model;
 
 namespace WpfNetCore_HW8.Model
 {
+    [Serializable]
     public class Company : INotifyPropertyChangedCustom
     {
         private int _departmentsId;

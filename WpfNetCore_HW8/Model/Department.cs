@@ -7,7 +7,7 @@ using WpfNetCore_HW8.EmployerListSort;
 
 namespace WpfNetCore_HW8.Model
 {
-    
+    [Serializable]
     public class Department : INotifyPropertyChangedCustom
     {
         private int _departmentId;
