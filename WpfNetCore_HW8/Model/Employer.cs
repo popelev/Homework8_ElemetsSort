@@ -3,12 +3,17 @@ using System.Collections.Generic;
 
 namespace WpfNetCore_HW8.Model
 {
-    public class Employer : INotifyPropertyChangedCustom, IComparable
+    [Serializable]
+    public class Employer : INotifyPropertyChangedCustom, IComparable, ICloneable
     {
         private Person Person;
         private int _departmentId;
         private int _salary;
         private long  _employerId;
+
+        public Employer()
+        {
+        }
 
         public Employer(Person person)
         {
@@ -84,6 +89,11 @@ namespace WpfNetCore_HW8.Model
         public Sex Sex
         {
             get => Person.Passport.Sex;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
         public int CompareTo(object obj)
