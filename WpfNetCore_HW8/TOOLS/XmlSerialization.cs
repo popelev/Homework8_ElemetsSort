@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
@@ -9,19 +10,39 @@ namespace WpfNetCore_HW8.TOOLS
 {
     public class XmlSerialization
     {
-        XmlSerializer formatter = new XmlSerializer(typeof(Employer));
-        FileStream fs = new FileStream("Employer.xml", FileMode.OpenOrCreate);
+        XmlSerialization(){}
+
+        public XmlSerialization(string Path)
+        {
+            FilePath = Path;
+        }
+
+        private string _filePath;
+
+        public string FilePath
+        {
+            get { return _filePath; }
+            set { _filePath = value; }
+        }
 
         // получаем поток, куда будем записывать сериализованный объект
-        public void Serialize(FileStream fs, Employer employer)
+        public void Serialize( BindingList<Employer> employers)
         {
-            formatter.Serialize(fs, employer);
+            FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate);
+
+            XmlSerializer formatter = new XmlSerializer(typeof(BindingList<Employer>));
+
+            formatter.Serialize(fs, employers);
         }
 
         // десериализация
-        public void Deserialize(FileStream fs, Employer employer)
+        public BindingList<Employer> Deserialize()
         {
-            Employer newEmployer = (Employer)formatter.Deserialize(fs);
+            FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate);
+
+            XmlSerializer formatter = new XmlSerializer(typeof(BindingList<Employer>));
+
+            return (BindingList<Employer>)formatter.Deserialize(fs);
         }
 
     }

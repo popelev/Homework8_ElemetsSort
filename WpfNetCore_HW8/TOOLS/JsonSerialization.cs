@@ -2,7 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using WpfNetCore_HW8.Model;
 
 namespace WpfNetCore_HW8.TOOLS
@@ -14,21 +18,32 @@ namespace WpfNetCore_HW8.TOOLS
 
         }
 
+        public JsonSerialization(string Path)
+        {
+            FilePath = Path;
+        }
+
+        private string _filePath;
+
+        public string FilePath
+        {
+            get { return _filePath; }
+            set { _filePath = value; }
+        }
+
         /// <summary>
         /// Convert Employer List to JSON string List
         /// </summary>
         /// <param name="Employer"></param>
         /// <returns></returns>
-        public List<string> EmployersToStrings(BindingList<Employer> list)
+        public void Serialize(BindingList<Employer> list)
         {
-            List<string> _list = new List<string>();
+            TextWriter tw = new StreamWriter(FilePath);
 
             foreach (var employer in list)
             {
-                _list.Add(JsonConvert.SerializeObject(employer));
+                tw.Write(JsonConvert.SerializeObject(employer));
             }
-
-            return _list;
         }
 
         /// <summary>
@@ -36,10 +51,11 @@ namespace WpfNetCore_HW8.TOOLS
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        public List<Employer> StringsToEmployers(List<string> rows)
+        public BindingList<Employer> StringsToEmployers()
         {
-            List<Employer> _list = new List<Employer>();
-            foreach (var row in rows)
+            List<string> allLinesText = File.ReadAllLines(FilePath).ToList();
+            BindingList<Employer> _list = new BindingList<Employer>();
+            foreach (var row in allLinesText)
             {
                 _list.Add((Employer) JsonConvert.DeserializeObject<Employer>(row).Clone());
             }

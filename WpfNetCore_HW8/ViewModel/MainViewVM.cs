@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
 using WpfNetCore_HW8.Annotations;
 using WpfNetCore_HW8.Model;
 using WpfNetCore_HW8.TOOLS;
@@ -123,6 +125,42 @@ namespace WpfNetCore_HW8.ViewModel
                        (sortEmployerByPatronymicAndFirstNameCommand = new RelayCommand(obj =>
                        {
                            company.SortByPatronymicAndFirstName();
+                       }));
+            }
+        }
+        private RelayCommand saveAsFileCommand;
+
+        public RelayCommand SaveAsFileCommand
+        {
+            get
+            {
+                return saveAsFileCommand ??
+                       (saveAsFileCommand = new RelayCommand(obj =>
+                       {
+                           SaveFileDialog save = new SaveFileDialog();
+                           save.Filter = "JSON file format (*.json)|*.json|XML file format (*.xml)|*.xml";
+                           save.FilterIndex = 1;
+                           save.ShowDialog();
+                           if (save.FileName != "")
+                           {
+                               string path = save.FileName;
+                               File.Delete(path);
+
+                               if (save.FilterIndex == 0)
+                               {
+
+                               }
+                               else if (save.FilterIndex == 1)
+                               {
+                                   JsonSerialization serializer = new JsonSerialization(save.FileName);
+                                   serializer.Serialize(company.EmployersFromAllDepartments);
+                               }
+                               else if (save.FilterIndex == 2)
+                               {
+                                   XmlSerialization serializer = new XmlSerialization(save.FileName);
+                                   serializer.Serialize(company.EmployersFromAllDepartments);
+                               }
+                           }
                        }));
             }
         }
